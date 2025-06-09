@@ -1,0 +1,51 @@
+---
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+ - repo: https://github.com/pre-commit/pre-commit-hooks
+   rev: v5.0.0
+   hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: check-yaml
+    - id: check-toml
+    - id: check-added-large-files
+    - id: debug-statements
+    - id: check-json
+    - id: pretty-format-json
+      args: [--autofix]
+
+ - repo: local
+   hooks:
+     - id: cargo-fmt
+       name: cargo fmt
+       entry: cargo fmt -- --check
+       language: system
+       types: [rust]
+
+     - id: cargo-clippy
+       name: cargo clippy
+       entry: cargo clippy --all-targets --all-features -- -D warnings
+       language: system
+       types: [rust]
+       pass_filenames: false
+
+     - id: cargo-test
+       name: cargo test
+       entry: cargo test --workspace
+       language: system
+       types: [rust]
+       pass_filenames: false
+
+
+ - repo: https://github.com/jorisroovers/gitlint
+   rev: v0.19.1
+   hooks:
+    - id: gitlint
+
+ # tomlsort
+ - repo: https://github.com/pappasam/toml-sort
+   rev: v0.24.2
+   hooks:
+    - id: toml-sort-fix
+      exclude: '\.lock$|\.toml$'

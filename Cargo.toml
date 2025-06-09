@@ -1,0 +1,13 @@
+[package]
+name = "gwrs"
+version = "0.1.0"
+edition = "2024"
+authors = ["Dr. Auro Mohanty", "auro.mohanty@protonmail.com"]
+description = "A Rust library for studying data from ground-based gravitational-wave detectors."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/open-physics/gwrs"
+readme = "README.md"
+
+[dependencies]
+astronomy = "0.1.1"
+ndarray = "0.16.1"
