@@ -1,1 +1,3 @@
-pub mod array;
+pub mod types {
+    pub mod array;
+}
