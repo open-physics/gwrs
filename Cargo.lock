@@ -21,9 +21,9 @@ checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 
 [[package]]
 name = "astronomy"
-version = "0.1.3"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "211a2471e09cc8c4b9b8939f1ea658f1294faf0f6bcd52eff382376999f8eac6"
+checksum = "cde20518fcb78d6a7a2bead96d23ca4a296fa09c18dfce885d5d0d3434de0a2e"
 dependencies = [
  "ndarray",
  "rust_decimal",
@@ -142,7 +142,7 @@ dependencies = [
 
 [[package]]
 name = "gwrs"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "astronomy",
  "ndarray",
