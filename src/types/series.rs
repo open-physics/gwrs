@@ -122,12 +122,12 @@ impl SeriesBuilder {
             None
         };
 
-        Ok(Series {
+        Ok(Series::new_internal(
             array_data,
-            x0: self.x0,
-            dx: self.dx,
-            _xindex_cache: resolved_index,
-        })
+            self.x0,
+            self.dx,
+            resolved_index,
+        ))
     }
 }
 
