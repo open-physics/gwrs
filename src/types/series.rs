@@ -315,7 +315,7 @@ mod tests {
     use crate::detector;
     use astronomy::time::Time;
     use astronomy::units::{Dimension, QuantityError, Unit, UnitProduct};
-    use astronomy::units::{JOULE, METER, SECOND};
+    use astronomy::units::{JOULE, METRE, SECOND};
     use ndarray::array;
 
     #[test]
@@ -337,7 +337,7 @@ mod tests {
 
         let data = SeriesBuilder::new()
             .value(array![1.0, 2.0, 3.0, 2.0, 4.0, 3.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             .x0(x0_qty.clone())
             .dx(dx_qty.clone())
             .name("Displacement".to_string())
@@ -347,7 +347,7 @@ mod tests {
             .unwrap();
 
         assert_eq!(data.value(), &array![1.0, 2.0, 3.0, 2.0, 4.0, 3.0]);
-        assert_eq!(data.unit(), &METER);
+        assert_eq!(data.unit(), &METRE);
         assert_eq!(data.get_name(), Some("Displacement"));
         assert_eq!(data.get_x0(), Some(&x0_qty));
         assert_eq!(data.get_dx(), Some(&dx_qty));
@@ -409,7 +409,7 @@ mod tests {
 
         let s1 = SeriesBuilder::new()
             .value(array![1.0, 2.0, 3.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             .xindex(xindex1_qty.clone())
             .name("Series1".to_string())
             .epoch(Time::from_gps_seconds(1000.0))
@@ -419,7 +419,7 @@ mod tests {
 
         let s2 = SeriesBuilder::new()
             .value(array![10.0, 20.0, 30.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             .xindex(xindex2_qty.clone())
             .name("Series2".to_string())
             .epoch(Time::from_gps_seconds(1000.0))
@@ -430,7 +430,7 @@ mod tests {
         let sum_s = (s1.clone() + s2).unwrap();
 
         assert_eq!(sum_s.value(), &array![11.0, 22.0, 33.0]);
-        assert_eq!(sum_s.unit(), &METER);
+        assert_eq!(sum_s.unit(), &METRE);
         assert_eq!(sum_s.get_name(), Some("Series1")); // From LHS
         assert_eq!(sum_s.get_epoch(), Some(Time::from_gps_seconds(1000.0))); // From LHS
         assert_eq!(sum_s.get_xindex().unwrap(), &xindex1_qty); // From LHS
@@ -443,7 +443,7 @@ mod tests {
         // s1 has some metadata as None, s2 has them
         let s1 = SeriesBuilder::new()
             .value(array![1.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             .name("LHS_Name".to_string()) // Will be taken from LHS
             // epoch: None
             // channel: None
@@ -455,7 +455,7 @@ mod tests {
                 .unwrap();
         let s2 = SeriesBuilder::new()
             .value(array![2.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             // name: None
             .epoch(Time::from_gps_seconds(200.0)) // Will be taken from RHS
             .channel(s2_channel.clone()) // Will be taken from RHS
@@ -475,12 +475,12 @@ mod tests {
         // Test with both names None
         let s3 = SeriesBuilder::new()
             .value(array![1.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             .build()
             .unwrap();
         let s4 = SeriesBuilder::new()
             .value(array![2.0])
-            .unit(METER.clone())
+            .unit(METRE.clone())
             .build()
             .unwrap();
         let sum_s_none_names = (s3 + s4).unwrap();
@@ -489,7 +489,7 @@ mod tests {
 
     #[test]
     fn test_series_x0_dx_incompatible_units() {
-        let x0_qty = Quantity::new(array![0.0], METER.clone());
+        let x0_qty = Quantity::new(array![0.0], METRE.clone());
         let dx_qty = Quantity::new(array![1.0], SECOND.clone());
 
         let result = SeriesBuilder::new()
@@ -527,7 +527,7 @@ mod tests {
 
     #[test]
     fn test_series_missing_value() {
-        let result = SeriesBuilder::new().unit(METER.clone()).build();
+        let result = SeriesBuilder::new().unit(METRE.clone()).build();
         assert!(result.is_err());
         if let QuantityError::InvalidQuantity(msg) = result.unwrap_err() {
             assert_eq!(msg, "Value is required to build Series");

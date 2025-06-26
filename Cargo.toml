@@ -9,6 +9,6 @@ repository = "https://github.com/open-physics/gwrs"
 readme = "README.md"
 
 [dependencies]
-astronomy = "0.1.4"
+astronomy = "0.1.5"
 ndarray = "0.16.1"
 thiserror = "2.0.12"

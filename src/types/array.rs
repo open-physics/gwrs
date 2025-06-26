@@ -124,7 +124,7 @@ impl Div for GWArray {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use astronomy::units::{CENTIMETER, METER, SECOND};
+    use astronomy::units::{CENTIMETRE, METRE, SECOND};
     use ndarray::array;
 
     #[test]
@@ -132,13 +132,13 @@ mod tests {
         let value = array![1.0, 2.0, 3.0];
         let gw_array = GWArray::new(
             value,
-            Some(METER),
+            Some(METRE),
             Some("Test Array".to_string()),
             None,
             None,
         );
         assert_eq!(gw_array.value(), &array![1.0, 2.0, 3.0]);
-        assert_eq!(gw_array.unit(), &METER);
+        assert_eq!(gw_array.unit(), &METRE);
         assert_eq!(gw_array.name, Some("Test Array".to_string()));
     }
 
@@ -146,13 +146,13 @@ mod tests {
     fn test_gwarray_creation_and_name() {
         let gw_array = GWArray::new(
             array![1.0, 2.0, 3.0],
-            Some(METER.clone()),
+            Some(METRE.clone()),
             Some("Test Array".to_string()),
             None,
             None,
         );
         assert_eq!(gw_array.name, Some("Test Array".to_string()));
-        assert_eq!(gw_array.unit(), &METER);
+        assert_eq!(gw_array.unit(), &METRE);
         assert_eq!(gw_array.value(), &array![1.0, 2.0, 3.0]);
     }
 
@@ -160,36 +160,36 @@ mod tests {
     fn test_gw_array_to_method() {
         let gw_array = GWArray::new(
             array![1.0, 2.0, 3.0],
-            Some(METER.clone()),
+            Some(METRE.clone()),
             Some("Test Array".to_string()),
             None,
             None,
         );
-        let converted_array = gw_array.to(&CENTIMETER).unwrap();
+        let converted_array = gw_array.to(&CENTIMETRE).unwrap();
 
         assert_eq!(converted_array.value(), &array![100.0, 200.0, 300.0]);
-        assert_eq!(converted_array.unit(), &CENTIMETER);
+        assert_eq!(converted_array.unit(), &CENTIMETRE);
         assert_eq!(converted_array.name, Some("Test Array".to_string()));
     }
 
     #[test]
     fn test_gw_array_addition() {
-        let gw_array1 = GWArray::new(array![1.0, 2.0, 3.0], Some(METER.clone()), None, None, None);
-        let gw_array2 = GWArray::new(array![4.0, 5.0, 6.0], Some(METER.clone()), None, None, None);
+        let gw_array1 = GWArray::new(array![1.0, 2.0, 3.0], Some(METRE.clone()), None, None, None);
+        let gw_array2 = GWArray::new(array![4.0, 5.0, 6.0], Some(METRE.clone()), None, None, None);
         let result = gw_array1 + gw_array2;
 
         assert!(result.is_ok());
         let added_array = result.unwrap();
         assert_eq!(added_array.value(), &array![5.0, 7.0, 9.0]);
-        assert_eq!(added_array.unit(), &METER);
+        assert_eq!(added_array.unit(), &METRE);
     }
 
     #[test]
     fn test_gw_array_addition_with_different_units_same_dimension() {
-        let gw_array1 = GWArray::new(array![1.0, 2.0, 3.0], Some(METER.clone()), None, None, None);
+        let gw_array1 = GWArray::new(array![1.0, 2.0, 3.0], Some(METRE.clone()), None, None, None);
         let gw_array2 = GWArray::new(
             array![100.0, 200.0, 300.0],
-            Some(CENTIMETER.clone()),
+            Some(CENTIMETRE.clone()),
             None,
             None,
             None,
@@ -207,7 +207,7 @@ mod tests {
 
     #[test]
     fn test_gw_array_addition_with_different_units_different_dimension() {
-        let gw_array1 = GWArray::new(array![1.0, 2.0, 3.0], Some(METER.clone()), None, None, None);
+        let gw_array1 = GWArray::new(array![1.0, 2.0, 3.0], Some(METRE.clone()), None, None, None);
         let gw_array2 = GWArray::new(
             array![100.0, 200.0, 300.0],
             Some(SECOND.clone()),

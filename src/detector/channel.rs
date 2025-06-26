@@ -146,7 +146,7 @@ impl std::fmt::Display for Channel {
 #[cfg(test)]
 mod channel_tests {
     use super::*;
-    use astronomy::units::{METER, Unit};
+    use astronomy::units::{METRE, Unit};
 
     #[test]
     fn test_channel_creation_minimal() {
@@ -176,7 +176,7 @@ mod channel_tests {
         let channel = Channel::new(
             "H1:GWOSC-4KHZ_RAMP_C00",
             Some(4096.0),
-            Some(METER),
+            Some(METRE),
             Some((0.0, 1000.0)),
             Some(true),
             Some("L1_HOFT_C00".to_string()),
