@@ -180,6 +180,19 @@ impl Series {
     pub fn get_xindex(&self) -> Option<&Quantity> {
         self._xindex_cache.as_ref()
     }
+    pub fn get_xspan(&self) -> Option<f64> {
+        if let Some(xindex_quantity) = self.get_xindex() {
+            if xindex_quantity.value.len() < 2 {
+                return None; // Not enough data to calculate span
+            }
+            Some(xindex_quantity.value.last().unwrap() - xindex_quantity.value[0])
+        } else if let Some(x0_quantity) = self.get_x0() {
+            self.get_dx()
+                .map(|dx_quantity| dx_quantity.value[0] * (x0_quantity.value.len() as f64 - 1.0))
+        } else {
+            None
+        }
+    }
     pub fn get_xunit(&self) -> Option<&Unit> {
         if let Some(xindex_quantity) = self.get_xindex() {
             Some(&xindex_quantity.unit)

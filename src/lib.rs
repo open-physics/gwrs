@@ -8,3 +8,6 @@ pub mod timeseries {
 pub mod detector {
     pub mod channel;
 }
+pub mod segments {
+    pub mod core;
+}
