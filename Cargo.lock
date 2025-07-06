@@ -142,7 +142,7 @@ dependencies = [
 
 [[package]]
 name = "gwrs"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "astronomy",
  "ndarray",
